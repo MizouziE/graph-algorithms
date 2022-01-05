@@ -1,10 +1,28 @@
-const hasPath = (graph, src, dst) => {
+//Depth First solution
+const hasPathDF = (graph, src, dst) => {
     if (src === dst) return true;
 
     for (let neighbour of graph[src]) {
-       if (hasPath(graph, neighbour, dst) === true) {
+       if (hasPathDF(graph, neighbour, dst) === true) {
            return true;
        } 
+    }
+
+    return false;
+};
+
+//Breadth First solution
+const hasPathBF = (graph, src, dst) => {
+    const queue = [ src ];
+
+    while (queue.length > 0) {
+        const current = queue.shift();
+        
+        if (current === dst) return true;
+        
+        for (let neighbour of graph[current]) {
+            queue.push(neighbour);
+        }
     }
 
     return false;
@@ -23,6 +41,10 @@ const graph = {
     k: []
 }
 
-console.log(hasPath(graph, 'f', 'k')); //true
-console.log(hasPath(graph, 'f', 'j')); //false
-console.log(hasPath(graph, 'i', 'h')); //true
+console.log(hasPathDF(graph, 'f', 'k')); //true
+console.log(hasPathDF(graph, 'f', 'j')); //false
+console.log(hasPathDF(graph, 'i', 'h')); //true
+console.log('Above is Depth First, below is Breadth First')
+console.log(hasPathBF(graph, 'f', 'k')); //true
+console.log(hasPathBF(graph, 'f', 'j')); //false
+console.log(hasPathBF(graph, 'i', 'h')); //true
