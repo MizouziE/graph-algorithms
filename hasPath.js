@@ -10,6 +10,10 @@ const hasPath = (graph, src, dst) => {
     return false;
 };
 
+// NOTE: the below graph is acyclic so we have not
+// needed to account for getting trapped in a cycle
+// in the above logic
+
 const graph = {
     f: ['g', 'i'],
     g: ['h'],
