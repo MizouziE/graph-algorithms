@@ -1,4 +1,4 @@
-const depthFirstPrint = (graph, source) => {
+const iterativeDepthFirstPrint = (graph, source) => {
     const stack = [ source ];
 
     while (stack.length > 0) {
@@ -11,6 +11,13 @@ const depthFirstPrint = (graph, source) => {
     }
 };
 
+const recursiveDepthFirstPrint = (graph, source) => {
+    console.log(source);
+    for (let neighbour of graph[source]) {
+        recursiveDepthFirstPrint(graph, neighbour);
+    }
+};
+
 const graph = {
     a: ['b', 'c'],
     b: ['d'],
@@ -20,4 +27,6 @@ const graph = {
     f: []
 };
 
-depthFirstPrint(graph, 'a');
+iterativeDepthFirstPrint(graph, 'a');
+console.log('Above is iterative, below is recursive');
+recursiveDepthFirstPrint(graph, 'a');
